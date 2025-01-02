@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save The Day Laundry Done</title>
+    <style>
+        /* General reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #2E8B57;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 36px;
+        }
+
+        main {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        button {
+            background-color: #44c11ec2;
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        /* Style for icons in buttons */
+        .icon {
+            margin-right: 8px;
+        }
+
+        /* Circle style for the call and website icons */
+        .icon-circle {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: white;
+            color: #2E8B57;
+            font-size: 20px;
+            margin-right: 8px;
+            border: 2px solid #2E8B57;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Save The Day Laundry Done</h1>
+    </header>
+
+    <p>Open - Close:</p>
+    <p>Monday 08:00am - 17:30</p>
+    <p>Tuesday 08:00am - 17:30</p>
+    <p>Wednesday 08:00am - 17:30</p>
+    <p>Thursday 08:00am - 17:30</p>
+    <p>Friday 08:00am - 17:30</p>
+    <p>Saturday 08:00am - 15:30</p>
+    <p>Sunday - Closed</p>
+
+    <main>
+        <section>
+            <h2>Contact Information</h2>
+            <p>Contact us at:</p>
+            <p>📞 076 746 9800</p>
+            <p>📞 064 640 8018</p>
+            <button id="callButton">
+                <span class="icon-circle">📞</span> Call
+            </button>
+            <button id="locationButton">
+                <span class="icon">🛣️</span> Location
+            </button>
+            <button id="websiteButton">
+                <span class="icon-circle">🌐</span> Website
+            </button>
+            <button id="shareButton">
+                <span class="icon">🔗</span> Share
+            </button>
+            <button id="saveButton">
+                <span class="icon">💾</span> Save
+            </button>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 Save The Day Laundry Done</p>
+    </footer>
+
+    <script>
+        // Call button action
+        document.getElementById('callButton').addEventListener('click', function () {
+            // Open the dialer for both phone numbers
+            var phoneNumber = '0767469800'; // First phone number
+            var phoneNumber2 = '0646408018'; // Second phone number
+            var dialLink = 'tel:' + phoneNumber;  // Creates a dial link for first number
+
+            // If you'd like to prompt for a selection or directly open one number, you can add logic to choose which number to dial
+            if (confirm('Do you want to call Save The Day Laundry at ' + phoneNumber + ' or ' + phoneNumber2 + '?')) {
+                window.location.href = dialLink;  // Directs to dialer with first phone number
+            }
+        });
+
+        // Location button action (updated with the provided address in Google Maps link)
+        document.getElementById('locationButton').addEventListener('click', function () {
+            window.open('https://www.google.com/maps?q=15cc+nkandla+damonsville', '_blank');
+        });
+
+        // Website button action (updated with the provided link)
+        document.getElementById('websiteButton').addEventListener('click', function () {
+            window.open('http://127.0.0.1:5500/!website.html', '_blank');
+        });
+
+        // Share button action
+        document.getElementById('shareButton').addEventListener('click', function () {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Save The Day Laundry Done',
+                    text: 'Check out this great laundry service!',
+                    url: 'http://127.0.0.1:5500/!website.html'
+                }).then(() => {
+                    console.log('Thanks for sharing!');
+                }).catch((error) => {
+                    console.error('Error sharing:', error);
+                });
+            } else {
+                alert('Sharing is not supported on this device.');
+            }
+        });
+
+        // Save button action
+        document.getElementById('saveButton').addEventListener('click', function () {
+            alert("The page has been saved! (This is a simulated action.)");
+            // Here you could implement saving to a favorites list, bookmarking, or any other feature
+        });
+    </script>
+</body>
+
+</html>
