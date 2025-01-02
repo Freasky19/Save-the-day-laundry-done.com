@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save The Day Laundry</title>
+    <!-- Font Awesome for Social Media Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* General reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .rounded-image {
+            width: 300px;
+            height: 200px;
+            border-radius: 20px;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            transition: background-image 1s ease-in-out; /* For smooth transition */
+        }
+
+        /* Header Section with Logo and Title */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #2E8B57;
+            color: white;
+            padding: 20px;
+            text-align: left;
+        }
+
+        h1 {
+            font-size: 36px;
+        }
+
+        /* Logo Styling */
+        .logo {
+            width: 50px;
+            height: 50px;
+        }
+
+        /* Menu toggle lines */
+        .menu-lines {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 25px;
+        }
+
+        .menu-lines .line {
+            height: 5px;
+            background-color: white;
+            border-radius: 5px;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .button-container {
+            margin-top: 30px;
+        }
+
+        button {
+            background-color: #44c11ec2;
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .icon-circle {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: white;
+            color: #2E8B57;
+            font-size: 20px;
+            margin-right: 8px;
+            border: 2px solid #2E8B57;
+        }
+
+        .social-icons {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .social-icons a {
+            margin: 0 15px;
+            font-size: 30px;
+            color: #2E8B57;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #45a049;
+        }
+
+        /* About Us Section */
+        #aboutUs {
+            display: none;
+            text-align: center;
+        }
+
+        /* Categories Section */
+        #categoriesSection {
+            text-align: center;
+            margin-top: 20px;
+            display: none; /* Hidden initially */
+        }
+
+        #categoriesSection ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #categoriesSection li {
+            cursor: pointer;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        /* Category Content Section */
+        #categoryContent {
+            display: none;
+            text-align: center;
+        }
+
+        /* Booking Form */
+        .booking-form {
+            margin-top: 40px;
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .booking-form label {
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .booking-form input,
+        .booking-form select,
+        .booking-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .booking-form button {
+            width: 100%;
+            background-color: grey;
+            color: white;
+            font-size: 18px;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: not-allowed;
+        }
+
+        .booking-form button.enabled {
+            background-color: #2E8B57;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- Logo Upload Section -->
+    <div class="logo-container">
+        <img src="logo.jpg" class="rounded-image">
+    </div>
+
+    <!-- Header Section with Logo and Title -->
+    <header>
+        <h1>Save The Day Laundry Done (LTD PTY)</h1>
+        <div class="menu-lines" id="menuLines" aria-label="Menu Toggle">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </header>
+
+    <!-- Categories Section -->
+    <div id="categoriesSection" aria-live="polite">
+        <ul>
+            <li onclick="showCategoryContent('Entertainment')">Entertainment</li>
+            <li onclick="showCategoryContent('Old Age')">Old Age</li>
+            <li onclick="showCategoryContent('Sports')">Sports</li>
+            <li onclick="showCategoryContent('Events')">Events</li>
+        </ul>
+    </div>
+
+    <!-- Category Content Section -->
+    <div id="categoryContent" aria-live="polite">
+        <h2 id="categoryTitle"></h2>
+        <p id="categoryDescription"></p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="main-content">
+        <h2>How Can We Help You?</h2>
+        <div class="button-container">
+            <button id="aboutButton">
+                <span class="icon-circle">ℹ️</span> About Us
+            </button>
+            <button id="laundryButton">
+                <span class="icon-circle">🧺</span> Laundry
+            </button>
+            <button id="donateButton">
+                <span class="icon-circle">💝</span> Donate Clothes
+            </button>
+        </div>
+
+        <!-- Social Media Links -->
+        <div class="social-icons">
+            <a href="https://wa.me/yourwhatsappnumber" target="_blank" title="WhatsApp" aria-label="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://www.facebook.com/yourfacebookpage" target="_blank" title="Facebook" aria-label="Facebook">
+                <i class="fab fa-facebook"></i>
+            </a>
+            <a href="https://www.instagram.com/yourinstagram" target="_blank" title="Instagram" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- About Us Section -->
+    <section id="aboutUs" style="display: none;">
+        <h2>About Us</h2>
+        <h2>Save The Day Laundry Done(LTD PTY).</h2>
+        <p style="text-align: left;">It is a registered company that offers all types of laundry from basket to your full home, giving you a fresh smell and making your house a home.</p>
+        <p style="text-align: left;">We do all jobs and save you time and day so you can spend time with your family.</p>
+        <p style="text-align: left;">The work that we do includes:</p>
+        <p style="text-align: left;">* Washing ("removing all the stains")</p>
+        <p style="text-align: left;">* Ironing</p>
+        <p style="text-align: left;">* Folding</p>
+        <p style="text-align: left;">We also accept donations from the community and companies under school uniform. We also support sport and entertainment.</p>
+        <div>
+            <br></br>
+            <h2>Founders</h2>
+            <img src="pic1.jpg" alt="Founder 1" class="rounded-image" style="width: 150px; display: inline-block;">
+            <p>SP Molefe</p>
+            <br></br>
+            <img src="pc2.jpg" alt="Founder 2" class="rounded-image" style="width: 150px; display: inline-block;">
+            <p>ET Maleleka</p>
+
+        </div>
+        <button id="backButton">Back to Website</button>
+    </section>
+
+    <!-- Laundry Form -->
+    <div id="bookingForm" class="booking-form" style="display: none;">
+        <h2>Book Your Laundry Service</h2>
+        <form>
+            <label for="clothesType">Type of baskets</label>
+            <select id="clothesType">
+                <option value="Mini baskets">Mini baskets</option>
+                <option value="Medium baskets">Medium baskets</option>
+                <option value="Large baskets">Large baskets</option>
+            </select>
+
+            <label for="deliveryAddress">Delivery Address</label>
+            <input type="text" id="deliveryAddress" required>
+
+            <label for="specialInstructions">Special Instructions</label>
+            <textarea id="specialInstructions"></textarea>
+
+            <button type="submit" class="enabled">Submit</button>
+        </form>
+    </div>
+
+    <!-- Donation Form -->
+    <div id="donationForm" class="booking-form" style="display: none;">
+        <h2>Donation Details</h2>
+        <form>
+            <label for="donorName">Name</label>
+            <input type="text" id="donorName" required>
+
+            <label for="schoolName">School Name</label>
+            <input type="text" id="schoolName" required>
+
+            <label for="numItems">How Many Items?</label>
+            <input type="number" id="numItems" required>
+
+            <label for="address">Address</label>
+            <input type="text" id="address" name="address" required disabled>
+
+            <label for="contact">Contact </label>
+            <input type="text" id="contact" name="contact" required disabled>
+
+            <label for="location">Pick up or Drop off</label>
+            <div class="location-options">
+                <label for="pickUp">
+                    <input type="radio" id="pickUp" name="location" value="Pick Up" onclick="toggleAddressRequirement()"> Pick Up
+                </label>
+                <label for="dropOff">
+                    <input type="radio" id="dropOff" name="location" value="Drop Off" onclick="toggleAddressRequirement()"> Drop Off
+                </label>
+            </div>
+
+            <button type="submit" class="enabled">Submit</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>© 2024 Save The Day Laundry</p>
+    </footer>
+
+    <script>
+        // List of images to be used as the background for the slideshow
+        const backgroundImages = [
+            'url("")', // Replace with your actual image URLs
+            'url("image2.jpg")',
+            'url("image3.jpg")',
+            'url("image4.jpg")',
+            
+            
+        ];
+
+        // Function to change the background image
+        function changeBackgroundImage() {
+            const randomIndex = Math.floor(Math.random() * backgroundImages.length);
+            document.body.style.backgroundImage = backgroundImages[randomIndex];
+        }
+
+        // Change the background image when the page loads
+        window.addEventListener('load', changeBackgroundImage);
+
+        // Handle category section
+        const categoriesSection = document.getElementById("categoriesSection");
+        const categoryContent = document.getElementById("categoryContent");
+        const categoryTitle = document.getElementById("categoryTitle");
+        const categoryDescription = document.getElementById("categoryDescription");
+
+        // Show or hide categories when the menu lines are clicked
+        document.getElementById("menuLines").addEventListener("click", function () {
+            categoriesSection.style.display = categoriesSection.style.display === "block" ? "none" : "block";
+        });
+
+        function showCategoryContent(category) {
+            categoriesSection.style.display = "none";
+            categoryContent.style.display = "block";
+            categoryTitle.innerText = category;
+            categoryDescription.innerText = `${category} related information`;
+        }
+
+        // Handle button clicks for different sections
+        document.getElementById("aboutButton").addEventListener("click", function () {
+            document.getElementById("main-content").style.display = "none";
+            document.getElementById("aboutUs").style.display = "block";
+        });
+
+        document.getElementById("laundryButton").addEventListener("click", function () {
+            document.getElementById("main-content").style.display = "none";
+            document.getElementById("bookingForm").style.display = "block";
+        });
+
+        document.getElementById("donateButton").addEventListener("click", function () {
+            document.getElementById("main-content").style.display = "none";
+            document.getElementById("donationForm").style.display = "block";
+        });
+
+        // Go back to main content
+        document.getElementById("backButton").addEventListener("click", function () {
+            document.getElementById("aboutUs").style.display = "none";
+            document.getElementById("main-content").style.display = "block";
+        });
+
+        function toggleAddressRequirement() {
+            const pickUpOption = document.getElementById("pickUp");
+            const addressInput = document.getElementById("address");
+            addressInput.disabled = !pickUpOption.checked;
+        }
+    </script>
+</body>
+
+</html>
